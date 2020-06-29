@@ -30,7 +30,7 @@ class Login extends Component
             return;
         }
 
-        redirect(route('home'));
+        redirect(route('app.home'));
     }
 
     public function render()

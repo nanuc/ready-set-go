@@ -13,6 +13,8 @@ use Nanuc\ReadySetGo\Http\Livewire\Auth\Passwords\Email;
 use Nanuc\ReadySetGo\Http\Livewire\Auth\Passwords\Reset;
 use Nanuc\ReadySetGo\Http\Livewire\Auth\Register;
 use Nanuc\ReadySetGo\Http\Livewire\Auth\Verify;
+use Nanuc\ReadySetGo\View\Components\Layouts\App;
+use Nanuc\ReadySetGo\View\Components\Layouts\LandingPage;
 use Nanuc\ReadySetGo\View\Components\Logo;
 
 class ReadySetGoServiceProvider extends ServiceProvider
@@ -22,7 +24,9 @@ class ReadySetGoServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'rsg');
 
         $this->loadViewComponentsAs('rsg', [
-            Logo::class
+            Logo::class,
+            LandingPage::class,
+            App::class,
         ]);
 
         if($this->app->runningInConsole()) {
@@ -33,9 +37,13 @@ class ReadySetGoServiceProvider extends ServiceProvider
 
         if(!class_exists('CreatePasswordResetsTable')) {
             $this->publishes([
-                __DIR__ . '/../database/migrations/create_passwords_resets_table.php.stub' => database_path('migrations/' . date('Y_m_d_His', time()) . '_create_passwords_reset_table.php')
+                __DIR__ . '/../database/migrations/create_password_resets_table.php.stub' => database_path('migrations/' . date('Y_m_d_His', time()) . '_create_password_resets_table.php')
             ], 'migrations');
         }
+
+        $this->publishes([
+            __DIR__ . '/../config/ready-set-go.php' => base_path('config/ready-set-go.php')
+        ], 'config');
 
         $this->addRoutes();
 
@@ -52,45 +60,52 @@ class ReadySetGoServiceProvider extends ServiceProvider
 
     public function register()
     {
-
+        $this->mergeConfigFrom(__DIR__.'/../config/ready-set-go.php', 'ready-set-go');
     }
 
     protected function addRoutes()
     {
-        Route::view('/', 'welcome')->name('home');
+        Route::middleware('web')->group(function () {
 
-        Route::layout('rsg::layouts.auth')->group(function () {
-            Route::middleware('guest')->group(function () {
-                Route::livewire('login', 'auth.login')
-                    ->name('login');
+            Route::view('/', 'landing-page.home')->name('home');
 
-                Route::livewire('register', 'auth.register')
-                    ->name('register');
+            Route::middleware(['auth', 'verified'])->group(function () {
+                Route::view(config('ready-set-go.app.route'), 'app.home')->name('app.home');
             });
 
-            Route::livewire('password/reset', 'auth.passwords.email')
-                ->name('password.request');
+            Route::layout('rsg::layouts.auth')->group(function () {
+                Route::middleware('guest')->group(function () {
+                    Route::livewire('login', 'auth.login')
+                        ->name('login');
 
-            Route::livewire('password/reset/{token}', 'auth.passwords.reset')
-                ->name('password.reset');
+                    Route::livewire('register', 'auth.register')
+                        ->name('register');
+                });
+
+                Route::livewire('password/reset', 'auth.passwords.email')
+                    ->name('password.request');
+
+                Route::livewire('password/reset/{token}', 'auth.passwords.reset')
+                    ->name('password.reset');
+
+                Route::middleware('auth')->group(function () {
+                    Route::livewire('email/verify', 'auth.verify')
+                        ->middleware('throttle:6,1')
+                        ->name('verification.notice');
+
+                    Route::livewire('password/confirm', 'auth.passwords.confirm')
+                        ->name('password.confirm');
+                });
+            });
 
             Route::middleware('auth')->group(function () {
-                Route::livewire('email/verify', 'auth.verify')
-                    ->middleware('throttle:6,1')
-                    ->name('verification.notice');
+                Route::get('email/verify/{id}/{hash}', 'Nanuc\ReadySetGo\Http\Controllers\Auth\EmailVerificationController')
+                    ->middleware('signed')
+                    ->name('verification.verify');
 
-                Route::livewire('password/confirm', 'auth.passwords.confirm')
-                    ->name('password.confirm');
+                Route::post('logout', 'Nanuc\ReadySetGo\Http\Controllers\Auth\LogoutController')
+                    ->name('logout');
             });
-        });
-
-        Route::middleware('auth')->group(function () {
-            Route::get('email/verify/{id}/{hash}', 'Nanuc\ReadySetGo\Http\Controllers\Auth\EmailVerificationController')
-                ->middleware('signed')
-                ->name('verification.verify');
-
-            Route::post('logout', 'Nanuc\ReadySetGo\Http\Controllers\Auth\LogoutController')
-                ->name('logout');
         });
     }
 }

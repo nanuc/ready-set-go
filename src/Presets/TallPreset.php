@@ -34,11 +34,7 @@ class TallPreset extends Preset
         });
 
         static::updateFile(base_path('app/Http/Middleware/RedirectIfAuthenticated.php'), function ($file) {
-            return str_replace("RouteServiceProvider::HOME", "route('home')", $file);
-        });
-
-        static::updateFile(base_path('app/Providers/RouteServiceProvider.php'), function ($file) {
-            return str_replace("public const HOME = '/home';", "public const HOME = '/';", $file);
+            return str_replace("RouteServiceProvider::HOME", "route('app.home')", $file);
         });
     }
 

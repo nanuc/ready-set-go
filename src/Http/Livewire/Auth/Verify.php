@@ -11,7 +11,7 @@ class Verify extends Component
     public function resend()
     {
         if (Auth::user()->hasVerifiedEmail()) {
-            redirect(route('home'));
+            redirect(route('app.home'));
         }
 
         Auth::user()->sendEmailVerificationNotification();
@@ -23,6 +23,6 @@ class Verify extends Component
 
     public function render()
     {
-        return view('ready-set-go:livewire.auth.verify');
+        return view('rsg::livewire.auth.verify');
     }
 }
