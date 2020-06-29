@@ -3,17 +3,19 @@
     "description": "Boilerplate for Nanuc projects based on TALL stack",
     "license": "MIT",
     "require": {
-        "nanuc/ready-set-go": "^1.0"
+        "livewire/livewire": "^1.2",
+        "laravel/ui": "^2.0",
+        "blade-ui-kit/blade-heroicons": "^0.1.1",
+        "nanuc/loggy": "^1.0"
     },
     "require-dev": {
-        "orchestra/testbench": "~3.0"
+        "orchestra/testbench": "^5.3"
     },
     "autoload": {
         "psr-4": {
             "Nanuc\\ReadySetGo\\": "src/"
         },
         "files": [
-            "src/helpers.php"
         ]
     },
     "extra": {
@@ -22,8 +24,8 @@
                 "Nanuc\\ReadySetGo\\ReadySetGoServiceProvider"
             ],
             "aliases": {
-                "Loggy": "Nanuc\\ReadySetGo\\Facades\\LReadySetGoFacade"
+                "ReadySetGo": "Nanuc\\ReadySetGo\\Facades\\ReadySetGoFacade"
             }
         }
     }
-},
+}

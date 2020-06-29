@@ -9,7 +9,12 @@ You can install the package via composer:
 composer require nanuc/ready-set-go
 ```
 
+// Run migrations
+
 ## Setup
+### Initialize
+The command `php artisan rsg:initialize` copies all the stuff you need. Attention: files are changed! Know what you are doing!
+
 ### Send mails
 Mails are sent with the Nanuc AWS SES account. Verify a domain at [https://eu-west-1.console.aws.amazon.com/ses/home?region=eu-west-1#verified-senders-domain:].
 
