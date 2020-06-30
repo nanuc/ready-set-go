@@ -3,7 +3,7 @@
 namespace Nanuc\ReadySetGo\Http\Livewire\Auth;
 
 use App\Providers\RouteServiceProvider;
-use App\User;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
