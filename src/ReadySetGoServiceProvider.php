@@ -3,6 +3,7 @@
 namespace Nanuc\ReadySetGo;
 
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
@@ -16,6 +17,7 @@ use Nanuc\ReadySetGo\Http\Livewire\Auth\Verify;
 use Nanuc\ReadySetGo\View\Components\Layouts\App;
 use Nanuc\ReadySetGo\View\Components\Layouts\LandingPage;
 use Nanuc\ReadySetGo\View\Components\Logo;
+use Nanuc\ReadySetGo\View\Components\WireInput;
 
 class ReadySetGoServiceProvider extends ServiceProvider
 {
@@ -28,6 +30,8 @@ class ReadySetGoServiceProvider extends ServiceProvider
             LandingPage::class,
             App::class,
         ]);
+
+        Blade::component('wire-input', WireInput::class);
 
         if($this->app->runningInConsole()) {
             $this->commands([
