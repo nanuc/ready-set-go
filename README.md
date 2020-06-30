@@ -3,11 +3,27 @@ Package to quickly create side projects based n the TALL stack with user managem
 
 
 ## Installation
-### Install via composer
+### Add repository to you composer.json
+```
+"repositories": [
+    {
+        "type": "vcs",
+        "url": "https://github.com/nanuc/ready-set-go"
+    }
+]
+```
+
+### Add package to composer.json
 You can install the package via composer:
 ```
-composer require nanuc/ready-set-go
+"require": {
+    ...
+    "nanuc/ready-set-go": "dev-master"
+},
 ```
+
+### Update composer
+`composer update`
 
 ## Setup
 ### Initialize
@@ -17,9 +33,21 @@ The command `php artisan rsg:initialize` copies all the stuff you need. Attentio
 `php artisan vendor:publish --provider="Nanuc\ReadySetGo\ReadySetGoServiceProvider" --tag=migrations`
 `php artisan migrate`
 
-### Enable user mail address verification
-Add `MustVerifyEmail` interface to `User` model:
-`class User extends Authenticatable implements MustVerifyEmail`
+### Update user model
+Your User model must extend `Nanuc\ReadySetGo\Models\BaseUser` instead of `Authenticatable`.
+
+### Cashier Paddle
+Update `.env` with Paddle data.
+```
+PADDLE_VENDOR_ID=your-paddle-vendor-id
+PADDLE_VENDOR_AUTH_CODE=your-paddle-vendor-auth-code
+PADDLE_PUBLIC_KEY="your-paddle-public-key"
+CASHIER_MODEL=App\Models\User
+``` 
+
+The default Cashier currency is United States Dollars (USD). You can change the default currency by setting the CASHIER_CURRENCY environment variable:
+`CASHIER_CURRENCY=EUR`
+
 
 ### Send mails
 Mails are sent with the Nanuc AWS SES account. Verify a domain at [https://eu-west-1.console.aws.amazon.com/ses/home?region=eu-west-1#verified-senders-domain:].
