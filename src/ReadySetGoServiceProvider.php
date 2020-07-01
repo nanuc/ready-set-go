@@ -23,6 +23,7 @@ use Nanuc\ReadySetGo\Http\Livewire\Profile\ChangeAvatar;
 use Nanuc\ReadySetGo\Http\Livewire\Profile\ChangeEmailAddress;
 use Nanuc\ReadySetGo\Http\Livewire\Profile\ChangeName;
 use Nanuc\ReadySetGo\Http\Livewire\Profile\ChangePassword;
+use Nanuc\ReadySetGo\Http\Livewire\Subscription\Subscription;
 use Nanuc\ReadySetGo\Lib\TabHelper;
 use Nanuc\ReadySetGo\View\Components\Layouts\App;
 use Nanuc\ReadySetGo\View\Components\Layouts\LandingPage;
@@ -119,6 +120,8 @@ class ReadySetGoServiceProvider extends ServiceProvider
         Livewire::component('profile.change-email-address', ChangeEmailAddress::class);
         Livewire::component('profile.change-name', ChangeName::class);
         Livewire::component('profile.change-password', ChangePassword::class);
+
+        Livewire::component('subscription', Subscription::class);
     }
 
     protected function addRoutes()
@@ -134,9 +137,7 @@ class ReadySetGoServiceProvider extends ServiceProvider
                 Route::post('/profile/avatar', [ProfileController::class, 'saveAvatar']);
                 Route::delete('/profile/avatar', [ProfileController::class, 'deleteAvatar']);
 
-                if(config('ready-set-go.subscription.activated')) {
-                    Route::get('/subscription', [SubscriptionController::class, 'index'])->name('subscription');
-                }
+
             });
 
             Route::layout('rsg::layouts.auth')->group(function () {
@@ -161,6 +162,8 @@ class ReadySetGoServiceProvider extends ServiceProvider
 
                     Route::livewire('password/confirm', 'auth.passwords.confirm')
                         ->name('password.confirm');
+
+
                 });
             });
 
@@ -171,6 +174,11 @@ class ReadySetGoServiceProvider extends ServiceProvider
 
                 Route::post('logout', 'Nanuc\ReadySetGo\Http\Controllers\Auth\LogoutController')
                     ->name('logout');
+
+                if(config('ready-set-go.subscription.activated')) {
+                    Route::get('/subscription', [SubscriptionController::class, 'index'])->name('subscription');
+                }
+
             });
         });
     }

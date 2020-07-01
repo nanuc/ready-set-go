@@ -25,8 +25,6 @@
             <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
         </div>
 
-
-
         <div
             x-show="isOpen"
             x-transition:enter="ease-out duration-300"
@@ -70,6 +68,5 @@
                 </div>
             @endif
         </div>
-
     </div>
 </div>
