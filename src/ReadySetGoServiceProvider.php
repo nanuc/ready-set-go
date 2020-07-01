@@ -4,11 +4,15 @@ namespace Nanuc\ReadySetGo;
 
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Arr;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
 use Livewire\Livewire;
 use Nanuc\ReadySetGo\Console\Initialize;
 use Nanuc\ReadySetGo\Http\Controllers\ProfileController;
+use Nanuc\ReadySetGo\Http\Controllers\SubscriptionController;
 use Nanuc\ReadySetGo\Http\Livewire\Auth\Login;
 use Nanuc\ReadySetGo\Http\Livewire\Auth\Passwords\Confirm;
 use Nanuc\ReadySetGo\Http\Livewire\Auth\Passwords\Email;
@@ -27,6 +31,7 @@ use Nanuc\ReadySetGo\View\Components\Modal;
 use Nanuc\ReadySetGo\View\Components\Tabs\TabItem;
 use Nanuc\ReadySetGo\View\Components\Tabs\Tabs;
 use Nanuc\ReadySetGo\View\Components\WireInput;
+
 
 class ReadySetGoServiceProvider extends ServiceProvider
 {
@@ -50,11 +55,7 @@ class ReadySetGoServiceProvider extends ServiceProvider
             return new TabHelper();
         });
 
-        if(!class_exists('CreatePasswordResetsTable')) {
-            $this->publishes([
-                __DIR__ . '/../database/migrations/create_password_resets_table.php.stub' => database_path('migrations/' . date('Y_m_d_His', time()) . '_create_password_resets_table.php')
-            ], 'migrations');
-        }
+
 
         $this->publishes([
             __DIR__ . '/../config/ready-set-go.php' => base_path('config/ready-set-go.php')
@@ -63,6 +64,7 @@ class ReadySetGoServiceProvider extends ServiceProvider
         $this->addRoutes();
         $this->registerLivewireComponents();
         $this->registerBladeComponents();
+        $this->registerMigrations();
 
 
         Paginator::defaultView('pagination::default');
@@ -80,6 +82,28 @@ class ReadySetGoServiceProvider extends ServiceProvider
         Blade::component('tabs', Tabs::class);
         Blade::component('tab-item', TabItem::class);
         Blade::component('modal', Modal::class);
+    }
+
+    protected function registerMigrations()
+    {
+        $migrations = [
+            'create_password_resets_table',
+            'create_subscription_tables',
+        ];
+
+        $publishedMigrations = collect(File::allFiles(database_path('migrations')))
+            ->map(function($file){
+                return Str::replaceLast('.php', '', substr($file->getFilename(), 18));
+            })
+            ->toArray();
+
+        foreach($migrations as $migration) {
+            if(!in_array($migration, $publishedMigrations)) {
+                $this->publishes([
+                    __DIR__ . '/../database/migrations/' . $migration . '.php.stub' => database_path('migrations/' . date('Y_m_d_His', time()) . '_' . $migration . '.php')
+                ], 'migrations');
+            }
+        }
     }
 
     protected function registerLivewireComponents()
@@ -109,6 +133,10 @@ class ReadySetGoServiceProvider extends ServiceProvider
                 Route::get('/profile', [ProfileController::class, 'show']);
                 Route::post('/profile/avatar', [ProfileController::class, 'saveAvatar']);
                 Route::delete('/profile/avatar', [ProfileController::class, 'deleteAvatar']);
+
+                if(config('ready-set-go.subscription.activated')) {
+                    Route::get('/subscription', [SubscriptionController::class, 'index'])->name('subscription');
+                }
             });
 
             Route::layout('rsg::layouts.auth')->group(function () {

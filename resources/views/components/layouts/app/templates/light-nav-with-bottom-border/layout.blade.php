@@ -51,6 +51,11 @@
                                     <a href="/profile" class="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out">
                                         Your Profile
                                     </a>
+                                    @if(config('ready-set-go.subscription.activated'))
+                                    <a href="/subscription" class="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out">
+                                        Subscription
+                                    </a>
+                                    @endif
                                     {{--
                                     <a href="#" class="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out">Settings
                                     </a>
@@ -102,6 +107,11 @@
                     <div class="mt-3" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
                         <a href="/profile" class="block px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100 focus:outline-none focus:text-gray-800 focus:bg-gray-100 transition duration-150 ease-in-out" role="menuitem">Your Profile
                         </a>
+                        @if(config('ready-set-go.subscription.activated'))
+                        <a href="/subscription" class="block px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100 focus:outline-none focus:text-gray-800 focus:bg-gray-100 transition duration-150 ease-in-out" role="menuitem">
+                            Subscription
+                        </a>
+                        @endif
                         {{--
                         <a href="#" class="mt-1 block px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100 focus:outline-none focus:text-gray-800 focus:bg-gray-100 transition duration-150 ease-in-out" role="menuitem">Settings
                         </a>
