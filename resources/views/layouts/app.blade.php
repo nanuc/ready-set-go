@@ -8,4 +8,17 @@
     </form>
 
     @include('rsg::modules.notification')
+
+    <script>
+        function showModal(id)
+        {
+            var event = new CustomEvent('show-modal', {
+                detail: {
+                    'id': id
+                }
+            });
+
+            window.dispatchEvent(event);
+        }
+    </script>
 @endsection

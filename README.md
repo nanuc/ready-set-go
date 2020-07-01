@@ -41,7 +41,9 @@ Update `.env` with Paddle data.
 ```
 PADDLE_VENDOR_ID=your-paddle-vendor-id
 PADDLE_VENDOR_AUTH_CODE=your-paddle-vendor-auth-code
-PADDLE_PUBLIC_KEY="your-paddle-public-key"
+PADDLE_PUBLIC_KEY="-----BEGIN PUBLIC KEY-----
+...
+-----END PUBLIC KEY-----"
 CASHIER_MODEL=App\Models\User
 ``` 
 

@@ -23,6 +23,7 @@ use Nanuc\ReadySetGo\Lib\TabHelper;
 use Nanuc\ReadySetGo\View\Components\Layouts\App;
 use Nanuc\ReadySetGo\View\Components\Layouts\LandingPage;
 use Nanuc\ReadySetGo\View\Components\Logo;
+use Nanuc\ReadySetGo\View\Components\Modal;
 use Nanuc\ReadySetGo\View\Components\Tabs\TabItem;
 use Nanuc\ReadySetGo\View\Components\Tabs\Tabs;
 use Nanuc\ReadySetGo\View\Components\WireInput;
@@ -78,6 +79,7 @@ class ReadySetGoServiceProvider extends ServiceProvider
         Blade::component('wire-input', WireInput::class);
         Blade::component('tabs', Tabs::class);
         Blade::component('tab-item', TabItem::class);
+        Blade::component('modal', Modal::class);
     }
 
     protected function registerLivewireComponents()

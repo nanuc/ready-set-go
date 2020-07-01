@@ -1,6 +1,6 @@
 <div class="fixed inset-0 flex items-end justify-center px-4 py-6 pointer-events-none sm:p-6 sm:items-start sm:justify-end z-50">
     <div
-            x-data="{ show: false, message: '' }"
+            x-data="{ show: false, message: '', notificationType: '' }"
             x-on:notify.window="show = true; message = $event.detail.message; notificationType = $event.detail.type; setTimeout(() => { show = false }, $event.detail.timeout ?? 5000)"
             x-show="show"
             x-transition:enter="transform ease-out duration-300 transition"
