@@ -20,6 +20,8 @@ module.exports = {
             './resources/**/*.php',
             './resources/**/*.vue',
             './resources/**/*.twig',
+            './vendor/nanuc/ready-set-go/src/**/*.php',
+            './vendor/nanuc/ready-set-go/resources/**/*.php',
         ],
         options: {
             defaultExtractor: (content) => content.match(/[\w-/.:]+(?<!:)/g) || [],
