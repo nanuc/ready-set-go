@@ -6,6 +6,7 @@
         "livewire/livewire": "^1.2",
         "laravel/ui": "^2.0",
         "blade-ui-kit/blade-heroicons": "^0.1.1",
+        "cviebrock/eloquent-sluggable": "^7.0",
         "nanuc/loggy": "^1.0",
         "schuppo/password-strength": "^1.14",
         "protonemedia/laravel-paddle": "^1.1"
