@@ -29,6 +29,7 @@
 
         <script src="{{ mix('js/app.js') }}"></script>
         @livewireScripts
-        @paddleJS
+        @stack('scripts')
+        {{-- @paddleJS --}}
     </body>
 </html>

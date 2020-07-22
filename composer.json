@@ -4,6 +4,7 @@
     "license": "MIT",
     "require": {
         "livewire/livewire": "^1.2",
+        "laravel/cashier-paddle": "^1.0@beta",
         "laravel/ui": "^2.0",
         "blade-ui-kit/blade-heroicons": "^0.1.1",
         "nanuc/loggy": "^1.0",
