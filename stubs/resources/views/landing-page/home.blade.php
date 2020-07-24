@@ -27,7 +27,7 @@
                     <div class="flex items-center flex-1 md:absolute md:inset-y-0 md:left-0">
                         <div class="flex items-center justify-between w-full md:w-auto">
                             <a href="#" aria-label="Home">
-                                <img class="h-8 w-auto sm:h-10" src="/img/logos/workflow-mark-on-white.svg" alt="Logo" />
+                                <img class="h-8 w-auto sm:h-10" src="/images/logo.png" alt="Logo" />
                             </a>
                             <div class="-mr-2 flex items-center md:hidden">
                                 <button type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out" id="main-menu" aria-label="Main menu" aria-haspopup="true">
@@ -73,7 +73,7 @@
                     <div class="rounded-lg bg-white shadow-xs overflow-hidden" role="menu" aria-orientation="vertical" aria-labelledby="main-menu">
                         <div class="px-5 pt-4 flex items-center justify-between">
                             <div>
-                                <img class="h-8 w-auto" src="/img/logos/workflow-mark-on-white.svg" alt="" />
+                                <img class="h-8 w-auto" src="/images/logo.png" alt="" />
                             </div>
                             <div class="-mr-2">
                                 <button type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out" aria-label="Close menu">
@@ -94,7 +94,7 @@
                             </a>
                         </div>
                         <div>
-                            <a href="#" class="block w-full px-5 py-3 text-center font-medium text-indigo-600 bg-gray-50 hover:bg-gray-100 hover:text-indigo-700 focus:outline-none focus:bg-gray-100 focus:text-indigo-700 transition duration-150 ease-in-out" role="menuitem">
+                            <a href="/login" class="block w-full px-5 py-3 text-center font-medium text-indigo-600 bg-gray-50 hover:bg-gray-100 hover:text-indigo-700 focus:outline-none focus:bg-gray-100 focus:text-indigo-700 transition duration-150 ease-in-out" role="menuitem">
                                 Log in
                             </a>
                         </div>
@@ -114,11 +114,13 @@
                         Replace this page with your own content from Tailwind UI (or not).
                     </p>
                     <div class="mt-5 max-w-md mx-auto sm:flex sm:justify-center md:mt-8">
+                        @if(config('ready-set-go.auth.registration.enabled'))
                         <div class="rounded-md shadow">
                             <a href="/register" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo transition duration-150 ease-in-out md:py-4 md:text-lg md:px-10">
                                 Register
                             </a>
                         </div>
+                        @endif
                         <div class="mt-3 rounded-md shadow sm:mt-0 sm:ml-3">
                             <a href="/login" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-indigo-600 bg-white hover:text-indigo-500 focus:outline-none focus:border-indigo-300 focus:shadow-outline-indigo transition duration-150 ease-in-out md:py-4 md:text-lg md:px-10">
                                 Login
