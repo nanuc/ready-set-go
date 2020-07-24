@@ -3,6 +3,7 @@
     "description": "Boilerplate for Nanuc projects based on TALL stack",
     "license": "MIT",
     "require": {
+        "aws/aws-sdk-php": "^3.147",
         "livewire/livewire": "^1.2",
         "laravel/cashier-paddle": "^1.0@beta",
         "laravel/ui": "^2.0",
