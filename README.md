@@ -66,6 +66,15 @@ SES_KEY=AKIA3I...
 SES_KEY_SECRET=CK6fTy...
 SES_REGION=eu-west-1
 ```
+
+config/services.php:
+```
+'ses' => [
+    'key' => env('SES_KEY'),
+    'secret' => env('SES_KEY_SECRET'),
+    'region' => env('SES_REGION'),
+],
+```
 ##### HELO
 ```
 MAIL_MAILER=smtp
