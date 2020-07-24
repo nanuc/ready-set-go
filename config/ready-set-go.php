@@ -7,5 +7,10 @@ return [
     ],
     'subscription' => [
         'activated' => env('RSG_SUBSCRIPTION_ACTIVATED', false),
+    ],
+    'auth' => [
+        'registration' => [
+            'enabled' => env('RSG_REGISTRATION_ENABLED', true),
+        ]
     ]
 ];

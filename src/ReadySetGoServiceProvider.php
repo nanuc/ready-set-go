@@ -136,17 +136,15 @@ class ReadySetGoServiceProvider extends ServiceProvider
                 Route::get('/profile', [ProfileController::class, 'show']);
                 Route::post('/profile/avatar', [ProfileController::class, 'saveAvatar']);
                 Route::delete('/profile/avatar', [ProfileController::class, 'deleteAvatar']);
-
-
             });
 
             Route::layout('rsg::layouts.auth')->group(function () {
                 Route::middleware('guest')->group(function () {
-                    Route::livewire('login', 'auth.login')
-                        ->name('login');
+                    Route::livewire('login', 'auth.login')->name('login');
 
-                    Route::livewire('register', 'auth.register')
-                        ->name('register');
+                    if (config('ready-set-go.auth.registration.enabled')) {
+                        Route::livewire('register', 'auth.register')->name('register');
+                    }
                 });
 
                 Route::livewire('password/reset', 'auth.passwords.email')
