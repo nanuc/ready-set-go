@@ -22,6 +22,6 @@ class Confirm extends Component
 
     public function render()
     {
-        return view('rsg:livewire.auth.passwords.confirm');
+        return view('rsg::livewire.auth.passwords.confirm');
     }
 }

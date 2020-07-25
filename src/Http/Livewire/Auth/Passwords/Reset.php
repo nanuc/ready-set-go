@@ -87,6 +87,6 @@ class Reset extends Component
 
     public function render()
     {
-        return view('rsg:livewire.auth.passwords.reset');
+        return view('rsg::livewire.auth.passwords.reset');
     }
 }

@@ -42,6 +42,6 @@ class Email extends Component
 
     public function render()
     {
-        return view('rsg:livewire.auth.passwords.email');
+        return view('rsg::livewire.auth.passwords.email');
     }
 }
