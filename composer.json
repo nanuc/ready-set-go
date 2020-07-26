@@ -11,11 +11,11 @@
         "cviebrock/eloquent-sluggable": "^7.0",
         "nanuc/loggy": "^1.0",
         "schuppo/password-strength": "^1.14",
-        "protonemedia/laravel-paddle": "^1.1"
+        "protonemedia/laravel-paddle": "^1.1",
+        "barryvdh/laravel-debugbar": "^3.3",
+        "barryvdh/laravel-ide-helper": "^2.7"
     },
     "require-dev": {
-        "barryvdh/laravel-debugbar": "^3.3",
-        "barryvdh/laravel-ide-helper": "^2.7",
         "orchestra/testbench": "^5.3"
     },
     "autoload": {
