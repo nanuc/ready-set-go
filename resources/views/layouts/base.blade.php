@@ -27,6 +27,21 @@
     <body>
         @yield('body')
 
+        @include('rsg::modules.notification')
+
+        <script>
+            function showModal(id)
+            {
+                var event = new CustomEvent('show-modal', {
+                    detail: {
+                        'id': id
+                    }
+                });
+
+                window.dispatchEvent(event);
+            }
+        </script>
+
         <script src="{{ mix('js/app.js') }}"></script>
         @livewireScripts
         @stack('scripts')
